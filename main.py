@@ -27,9 +27,9 @@ def time_to_seconds(time):
 
 ##descargar = Descargar('downloads/')
 
-@bot.on_message(filters.command("start"))
+@bot.on_message(filters.command("start") & filters.private)
 def start(client, message):
-    Ytdl_Bot = f"👋 Hello {message.from_user.username}\n\nI'm an advanced Song Finder Bot exclusively made for Malayalam Music Channel\nCheck my buttons below to know more..\n"
+    Ytdl_Bot = f"👋 Hello {message.from_user.username}\n\nI'm an advanced Song Finder Bot exclusively made for All Music Group\nCheck my buttons below to know more..\n"
     client.send_photo(message.chat.id,
         photo="https://telegra.ph/file/8da192351fc2fcb7bcf1f.jpg",
         caption=Ytdl_Bot,  
@@ -45,7 +45,7 @@ def start(client, message):
         )
     )
 
-@bot.on_message(filters.command("song"))
+@bot.on_message(filters.command("song") & filters.private)
 def a(client, message):
     query = ''
     for i in message.command[1:]:
