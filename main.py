@@ -134,7 +134,7 @@ async def a(client, message):
             dur += int(float(dur_arr[i])) * secmul
             secmul *= 60
         await m.edit("Uploading..📤")
-        message.reply_audio(
+        await message.reply_audio(
             audio_file,
             caption=rep,
             thumb=thumb_name,
