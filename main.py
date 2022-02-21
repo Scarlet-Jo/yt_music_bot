@@ -157,6 +157,8 @@ def a(client, message):
 
 @bot.on_callback_query()
 async def cb_handler(client, query):
+    results = YoutubeSearch(query, max_results=1).to_dict()
+    link = f"https://youtube.com{results[0]['url_suffix']}"
     info_dict = yt_dlp.YoutubeDL().extract_info(str(link), download=False)
     filename = f"{info_dict['title']}.mp3"
     ydl_opts = {
