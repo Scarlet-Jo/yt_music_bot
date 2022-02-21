@@ -143,6 +143,7 @@ def a(client, message):
                   InlineKeyboardButton("Send PM", callback_data="send_pm")
                 ]]
             )
+        )
         m.delete()
     except Exception as e:
         m.edit("❌ Error Contact Admin") 
