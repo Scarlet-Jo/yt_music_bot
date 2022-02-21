@@ -157,6 +157,15 @@ def a(client, message):
 
 @bot.on_callback_query()
 async def cb_handler(client, query):
+    ydl_opts = {
+             'format': 'bestaudio/best',
+             'postprocessors': [{
+             'key': 'FFmpegExtractAudio',
+                  'preferredcodec': 'mp3',
+                  'preferredquality': '320',
+                  }],
+             'outtmpl': filename,
+            }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(str(link), download=False)
         audio_file = ydl.prepare_filename(info_dict)
