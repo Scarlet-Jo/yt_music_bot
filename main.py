@@ -157,7 +157,7 @@ def a(client, message):
 
 @bot.on_callback_query()
 async def cb_handler(client, query):
-    filename = f"{info_dict['title']}.mp3"
+    
     ydl_opts = {
              'format': 'bestaudio/best',
              'postprocessors': [{
@@ -171,7 +171,8 @@ async def cb_handler(client, query):
         info_dict = ydl.extract_info(str(link), download=False)
         audio_file = ydl.prepare_filename(info_dict)
         ydl.process_info(info_dict)
-     
+
+    filename = f"{info_dict['title']}.mp3" 
     if query.data == "close_data":
         await query.message.delete()
 
