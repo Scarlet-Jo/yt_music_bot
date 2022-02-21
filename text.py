@@ -5,9 +5,9 @@ class Text (object):
    """
 
     ABOUT_TXT = """
-➙ Name : Scarlet Johanson
+➙ Name : Music Bot
 
-➙ Creator : <a href="https://t.me/rayner74">Rayner74</a>
+➙ Creator : <a href="https://t.me/joyalk74">JK</a>
 ➙ Language : <code>Python3 </code>
 ➙ Library : <a href="https://docs.pyrogram.org">Pyrogram </a>
 """
