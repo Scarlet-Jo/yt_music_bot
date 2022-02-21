@@ -149,7 +149,7 @@ async def a(client, message):
         )
         m.delete()
     except Exception as e:
-        m.edit("❌ Error Contact Admin") 
+        await m.edit("❌ Error Contact Admin") 
         print(e)
 
     try:
