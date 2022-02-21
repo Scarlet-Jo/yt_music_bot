@@ -51,7 +51,7 @@ async def a(client, message):
         await message.reply(text="I can't guss a song without name so, please send `song name` also", parse_mode='md')
 
     query = ''
-    for i in message.command[2:]:
+    for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
     m = await message.reply("Searching..🛸")
