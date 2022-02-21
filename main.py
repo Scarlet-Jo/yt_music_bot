@@ -157,6 +157,7 @@ def a(client, message):
 
 @bot.on_callback_query()
 async def cb_handler(client, query):
+    filename = f"{info_dict['title']}.mp3"
     ydl_opts = {
              'format': 'bestaudio/best',
              'postprocessors': [{
