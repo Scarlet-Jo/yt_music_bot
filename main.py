@@ -194,6 +194,6 @@ async def cb_handler(client, query):
                info_dict = ydl.extract_info(str(link), download=False)
                audio_file = ydl.prepare_filename(info_dict)
 
-        await query.answer(url=f"https://t.me/All_Music_Helpbot?start={audio_file}")
-        await query.answer(text= "send pm successfully")
+            await query.answer(url=f"https://t.me/All_Music_Helpbot?start={audio_file}")
+            await query.answer(text= "send pm successfully")
 bot.run()
