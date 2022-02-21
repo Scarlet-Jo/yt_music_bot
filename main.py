@@ -48,7 +48,7 @@ def start(client, message):
 @bot.on_message(filters.command("song") & filters.group)
 async def a(client, message):
     if len(message.command) == 1:
-        return await msg.reply(text="I can't guss a song name please send song name also", parse_mode='md')
+        await message.reply(text="I can't guss a song name please send song name also", parse_mode='md')
 
     query = ''
     for i in message.command[2:]:
