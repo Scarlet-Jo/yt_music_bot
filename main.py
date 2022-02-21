@@ -193,7 +193,9 @@ async def cb_handler(client, query):
            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                info_dict = ydl.extract_info(str(link), download=False)
                audio_file = ydl.prepare_filename(info_dict)
-
-            await query.answer(url=f"https://t.me/All_Music_Helpbot?start={audio_file}")
-            await query.answer(text= "send pm successfully")
+               ydl.process_info(info_dict)
+           await query.answer(url=f"https://t.me/All_Music_Helpbot?start={audio_file}")
+           await query.answer(text= "send pm successfully", show_alert=True)
+        except Exception as e:       
+        print(e) 
 bot.run()
