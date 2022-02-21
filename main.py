@@ -31,7 +31,7 @@ def time_to_seconds(time):
 def start(client, message):
     Ytdl_Bot = f"👋 Hello {message.from_user.username}\n\nI'm an advanced Song Finder Bot exclusively made for All Music Group\nCheck my buttons below to know more..\n"
     client.send_photo(message.chat.id,
-        photo="https://telegra.ph/file/8da192351fc2fcb7bcf1f.jpg",
+        photo="https://telegra.ph/file/29fbd51afc0c5172555d0.jpg",
         caption=Ytdl_Bot,  
         parse_mode='html',
         reply_markup=InlineKeyboardMarkup(
@@ -45,7 +45,7 @@ def start(client, message):
         )
     )
 
-@bot.on_message(filters.command("song") & filters.private)
+@bot.on_message(filters.command("song") & filters.group)
 def a(client, message):
     query = ''
     for i in message.command[1:]:
