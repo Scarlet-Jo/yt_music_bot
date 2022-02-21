@@ -46,15 +46,13 @@ def start(client, message):
     )
 
 @bot.on_message(filters.command("song") & filters.group)
-async def a(client, message):
-    if len(message.command) == 1:
-        await message.reply(text="I can't guss a song without name so, please send `song name` also", parse_mode='md')
-
+def a(client, message):
+    
     query = ''
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
-    m = await message.reply("Searching..🛸")
+    m =  message.reply("Searching..🥤")
    
     try:
         results = []
@@ -103,22 +101,18 @@ async def a(client, message):
                   }],
              'outtmpl': filename,
             }
-            """py_opts = {
-              'output_path':'self.path',
-              'filename':'{yt.title.replace("/","|")}-{yt.video_id}.mp3'
-            }"""
+           
         except Exception as e:
             print(e)
-            await m.edit('Try with correct Song name')
+            m.edit('Name incorrect or empty try with correct spelling')
             return
     except Exception as e:
-        await m.edit(
+        m.edit(
             "✖️ Check spelling bro try again\n\n"
         )
         print(str(e))
         return
-    await m.edit("Processing 📥")
-    #ytinfo = descargar.mp3_viaPytube(link)
+    m.edit("Processing 📥")
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -133,8 +127,8 @@ async def a(client, message):
         for i in range(len(dur_arr) - 1, -1, -1):
             dur += int(float(dur_arr[i])) * secmul
             secmul *= 60
-        await m.edit("Uploading..📤")
-        await message.reply_audio(
+        m.edit("Uploading..📤")
+        message.reply_audio(
             audio_file,
             caption=rep,
             thumb=thumb_name,
@@ -147,9 +141,9 @@ async def a(client, message):
             #    ]]
             #)
         )
-        await m.delete()
+        m.delete()
     except Exception as e:
-        await m.edit("❌ Error Contact Admin") 
+        m.edit("❌ Error Contact Admin") 
         print(e)
 
     try:
