@@ -47,11 +47,14 @@ def start(client, message):
 
 @bot.on_message(filters.command("song") & filters.group)
 def a(client, message):
+    if len(message.command) == 1:
+        return await msg.reply(text="I can't guss a song name please send song name also", parse_mode='md')
+
     query = ''
-    for i in message.command[1:]:
+    for i in message.command[2:]:
         query += ' ' + str(i)
     print(query)
-    m = message.reply("Searching..🧐")
+    m = message.reply("Searching..🛸")
    
     try:
         results = []
@@ -157,25 +160,7 @@ def a(client, message):
 
 @bot.on_callback_query()
 async def cb_handler(client, query):
-    results = YoutubeSearch(query, max_results=1).to_dict()
-    link = f"https://youtube.com{results[0]['url_suffix']}"
-    info_dict = yt_dlp.YoutubeDL().extract_info(str(link), download=False)
-    filename = f"{info_dict['title']}.mp3"
-    ydl_opts = {
-             'format': 'bestaudio/best',
-             'postprocessors': [{
-             'key': 'FFmpegExtractAudio',
-                  'preferredcodec': 'mp3',
-                  'preferredquality': '320',
-                  }],
-             'outtmpl': filename,
-            }
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info_dict = ydl.extract_info(str(link), download=False)
-        audio_file = ydl.prepare_filename(info_dict)
-        ydl.process_info(info_dict)
-
-    filename = f"{info_dict['title']}.mp3" 
+    
     if query.data == "close_data":
         await query.message.delete()
 
@@ -207,8 +192,8 @@ async def cb_handler(client, query):
 
     elif query.data == "eg":
         await query.answer(text=Text.EG_TXT, show_alert=True)
-    elif query.data == "send_pm":             
-       await query.answer(url=f"https://t.me/All_Music_Helpbot?start={audio_file}")
+    """elif query.data == "send_pm":             
+       await query.answer(url=f"https://t.me/All_Music_Helpbot?start={file_id}")
        await query.answer(text= "send pm successfully", show_alert=True)
-        
+    """
 bot.run()
