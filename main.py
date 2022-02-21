@@ -72,7 +72,7 @@ async def a(client, message):
             title = results[0]["title"]
             thumbnail = results[0]["thumbnails"][0]
             duration = results[0]["duration"]
-            katy = "[Scarlet Bot](https://t.me/scarletjo_bot)"
+            katy = "[Music Bot](https://t.me/all_music_helpbot)"
             ids = "message.from_user.username"
 
             #UNCOMMENT THIS IF YOU WANT A LIMIT ON DURATION. CHANGE 1800 TO YOUR OWN PREFFERED DURATION AND EDIT THE MESSAGE (30 minutes cap) LIMIT IN SECONDS
@@ -109,7 +109,7 @@ async def a(client, message):
             }"""
         except Exception as e:
             print(e)
-            m.edit('Try with correct Song name')
+            await m.edit('Try with correct Song name')
             return
     except Exception as e:
         m.edit(
@@ -117,7 +117,7 @@ async def a(client, message):
         )
         print(str(e))
         return
-    m.edit("Processing 📥")
+    await m.edit("Processing 📥")
     #ytinfo = descargar.mp3_viaPytube(link)
 
     try:
@@ -133,7 +133,7 @@ async def a(client, message):
         for i in range(len(dur_arr) - 1, -1, -1):
             dur += int(float(dur_arr[i])) * secmul
             secmul *= 60
-        m.edit("Uploading..📤")
+        await m.edit("Uploading..📤")
         message.reply_audio(
             audio_file,
             caption=rep,
