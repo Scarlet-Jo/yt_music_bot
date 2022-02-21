@@ -189,6 +189,10 @@ async def cb_handler(client, query):
     elif query.data == "eg":
         await query.answer(text=Text.EG_TXT, show_alert=True)
     elif query.data == "send_pm":
+        yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        info_dict = ydl.extract_info(str(link), download=False)
+        audio_file = ydl.prepare_filename(info_dict)
+
         await query.answer(url=f"https://t.me/All_Music_Helpbot?start={audio_file}")
         await query.answer(text= "send pm successfully")
 bot.run()
