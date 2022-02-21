@@ -141,11 +141,11 @@ def a(client, message):
             parse_mode="markdown",
             title=title,
             duration=dur,
-            reply_markup=InlineKeyboardMarkup(
-                [[
-                  InlineKeyboardButton("Send PM", callback_data="send_pm")
-                ]]
-            )
+            #reply_markup=InlineKeyboardMarkup(
+            #    [[
+            #      InlineKeyboardButton("Send PM", callback_data="send_pm")
+            #    ]]
+            #)
         )
         m.delete()
     except Exception as e:
