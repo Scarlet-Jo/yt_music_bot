@@ -10,6 +10,7 @@ from yt_dlp import YoutubeDL
 from text import Text
 from yt_dlp.postprocessor.common import PostProcessor
 #from pytube import YouTube
+import random
 
 import os
 from Config import Config
@@ -20,6 +21,7 @@ bot = Client(
     api_id = Config.API_ID,
     api_hash = Config.API_HASH
 )
+PICS = "https://telegra.ph/file/9bf7cc8100a7b64c67650.jpg https://telegra.ph/file/270303beef51ec94f746e.jpg"
 
 def time_to_seconds(time):
     stringt = str(time)
@@ -31,7 +33,7 @@ def time_to_seconds(time):
 def start(client, message):
     Ytdl_Bot = f"👋 Hello {message.from_user.username}\n\nI'm an advanced Song Finder Bot exclusively made for All Music Group\nCheck my buttons below to know more..\n"
     client.send_photo(message.chat.id,
-        photo="https://telegra.ph/file/29fbd51afc0c5172555d0.jpg",
+        photo=random.choice(PICS),
         caption=Ytdl_Bot,  
         parse_mode='html',
         reply_markup=InlineKeyboardMarkup(
