@@ -33,7 +33,7 @@ def time_to_seconds(time):
 @bot.on_message(filters.command("start") & filters.private)
 async def start(client, message):
     Ytdl_Bot = f"👋 Hello {message.from_user.username}\n\nI'm an advanced Song Finder Bot exclusively made for All Music Group\nCheck my buttons below to know more..\n"
-    await client.send_photo(message.chat.id,
+    await message.reply_photo(
         photo=random.choice(PICS),
         caption=Text.START_TXT.format(message.from_user.mention),  
         parse_mode='html',
