@@ -30,18 +30,18 @@ def time_to_seconds(time):
 ##descargar = Descargar('downloads/')
 
 @bot.on_message(filters.command("start") & filters.private)
-def start(client, message):
+async def start(client, message):
     Ytdl_Bot = f"👋 Hello {message.from_user.username}\n\nI'm an advanced Song Finder Bot exclusively made for All Music Group\nCheck my buttons below to know more..\n"
-    client.send_photo(message.chat.id,
+    await client.send_photo(message.chat.id,
         photo=random.choice(PICS),
-        caption=Ytdl_Bot,  
+        caption=Text.START_TXT.format(message.from_user.mention),  
         parse_mode='html',
         reply_markup=InlineKeyboardMarkup(
             [[
             InlineKeyboardButton("Help", callback_data="help"),
             InlineKeyboardButton("About", callback_data="about")
             ],[
-            InlineKeyboardButton("Channel", url="https://t.me/malayalam_music"),
+            InlineKeyboardButton("Group", url="https://t.me/All_music_grp"),
             InlineKeyboardButton("Close", callback_data="close_data")
             ]]
         )
