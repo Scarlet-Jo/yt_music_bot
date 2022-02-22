@@ -22,7 +22,10 @@ bot = Client(
     api_id = Config.API_ID,
     api_hash = Config.API_HASH
 )
-PICS = "https://telegra.ph/file/9bf7cc8100a7b64c67650.jpg, https://telegra.ph/file/270303beef51ec94f746e.jpg"
+PICS = [
+    "https://telegra.ph/file/9bf7cc8100a7b64c67650.jpg",
+    "https://telegra.ph/file/270303beef51ec94f746e.jpg"
+    ]
 
 def time_to_seconds(time):
     stringt = str(time)
