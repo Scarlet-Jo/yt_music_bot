@@ -110,13 +110,13 @@ def a(client, message):
            
         except Exception as e:
             print(e)
-                m.edit("No song name entered..!\nCheck Examples 👇",
-                     reply_markup=InlineKeyboardMarkup(
-                        [[
-                        InlineKeyboardButton("Examples", callback_data="egg")
-                        ]])
-                )
-                return
+            m.edit("No song name entered..!\nCheck Examples 👇",
+                 reply_markup=InlineKeyboardMarkup(
+                    [[
+                    InlineKeyboardButton("Examples", callback_data="egg")
+                    ]])
+            )
+            return
     except Exception as e:
         m.edit(
             "✖️ Check spelling bro try again\n\n"
@@ -160,6 +160,128 @@ def a(client, message):
     try:
         os.remove(audio_file)
         os.remove(thumb_name)
+    except Exception as e:
+        print(e)
+@bot.on_message(filters.command("find") & filters.group)
+async def finder(client, message):
+    m = await edit_or_reply(message, "Finding..🎧")
+    if not message.reply_to_message:
+        await m.edit("Reply to Audio or Video.")
+        return
+    if os.path.exists("friday.mp3"):
+        os.remove("friday.mp3")
+    fm = await fetch_audio(client, message)
+    downloaded_file_name = fm
+    f = {"file": (downloaded_file_name, open(downloaded_file_name, "rb"))}
+    await m.edit("Processing 📥")
+    rq = requests.post("https://starkapi.herokuapp.com/shazam/", files=f)
+    try:
+        scarlet = rq.json()
+    except JSONDecodeError:
+        await m.edit("Sorry I can't identify that song")
+        return
+    if scarlet.get("success") is False:
+        await m.edit("Sorry I can't identify that song")
+        os.remove(downloaded_file_name)
+        return
+    dlcmd = scarlet.get("response")
+    cmd1 = dlcmd[1]
+    cmd = cmd1.get("track")
+    if not cmd:
+        await m.edit("Sorry I can't identify that song")
+        return    
+    by = cmd.get("subtitle")
+    title = cmd.get("title")
+    
+    query = title
+    #for i in message.command[1:]:
+       # query += title + str(i)
+    print(query)   
+    try:
+        results = []
+        count = 0
+        while len(results) == 0 and count < 6:
+            if count>0:
+                time.sleep(1)
+            results = YoutubeSearch(query, max_results=1).to_dict()
+            count += 1
+        # results = YoutubeSearch(query, max_results=1).to_dict()
+        try:
+            link = f"https://youtube.com{results[0]['url_suffix']}"
+            # print(results)
+
+            title = results[0]["title"]
+            thumbnail = results[0]["thumbnails"][0]
+            duration = results[0]["duration"]
+            katy = "[Music Bot](https://t.me/All_Musicbot)"
+            ids = "message.from_user.username"
+
+            #UNCOMMENT THIS IF YOU WANT A LIMIT ON DURATION. CHANGE 1800 TO YOUR OWN PREFFERED DURATION AND EDIT THE MESSAGE (30 minutes cap) LIMIT IN SECONDS
+            if time_to_seconds(duration) >= 1800:  # duration limit
+                m.edit("Song Duration more 30 mint sorry I cant upload above this limit")
+                return
+
+            views = results[0]["views"]
+            thumb_name = f'thumb{message.message_id}.jpg'
+            thumb = requests.get(thumbnail, allow_redirects=True)
+            open(thumb_name, 'wb').write(thumb.content)
+            link = f"https://youtube.com{results[0]['url_suffix']}"           
+            info_dict = yt_dlp.YoutubeDL().extract_info(link, download=False)
+            filename = f"{info_dict['title']}.mp3"
+            out_folder = f"https://t.me/file_incoming"
+                      
+            ydl_opts = {
+             'format': 'bestaudio/best',
+             'postprocessors': [{
+             'key': 'FFmpegExtractAudio',
+                  'preferredcodec': 'mp3',
+                  'preferredquality': '320',
+                  }],
+             'outtmpl': filename,
+            }         
+        except Exception as e:
+            print(e)         
+            return
+    except Exception as e:
+        await m.edit(
+            "✖️ Check spelling bro try again\n\n"
+        )
+        print(str(e))
+        return
+    await m.edit("Uploading..📤")
+    #ytinfo = descargar.mp3_viaPytube(link)
+
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info_dict = ydl.extract_info(str(link), download=False)
+            audio_file = ydl.prepare_filename(info_dict)
+            ydl.process_info(info_dict)
+     
+    
+        #audio_file = f'downloads/{ytinfo.title.replace("/","|")}-{ytinfo.video_id}.mp3'
+        rep =f"⎆ Title : {title[:45]}\n⎆ Duration : {duration} \n⎆ Upload By : {katy}\n⎆ Reqstd by : {message.from_user.first_name}"
+        secmul, dur, dur_arr = 1, 0, duration.split(":")
+        for i in range(len(dur_arr) - 1, -1, -1):
+            dur += int(float(dur_arr[i])) * secmul
+            secmul *= 60
+        #await m.edit("Uploading..📤")
+        await message.reply_audio(
+            audio_file,
+            caption=rep,
+            thumb=thumb_name,
+            parse_mode="markdown",
+            title=title,
+            duration=dur
+        )
+        await m.delete()
+    except Exception as e:
+        await m.edit("❌ Error Contact Admin") 
+        print(e)
+
+    try:
+        os.remove(audio_file)
+        os.remove(thumb_name)
+        os.remove(downloaded_file_name)
     except Exception as e:
         print(e)
 
