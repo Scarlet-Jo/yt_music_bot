@@ -321,9 +321,9 @@ async def cb_handler(client, query):
         await query.answer(text=Text.EG_TXT, show_alert=True)
     
     elif query.data == "egg":
-        userid = query.from_user.id if query.from_user else None
+        userid = query.message.from_user.id if query.message.from_user else None
         if not userid:
-            return await query.reply("Not For You Bro 😁", show_alert=True)
+            return await query.answer("Not For You Bro 😁", show_alert=True)
         button = [[
             InlineKeyboardButton("Tutorial", url="https://t.me/all_music_c/5"),
             InlineKeyboardButton("Close", callback_data="close_data")
