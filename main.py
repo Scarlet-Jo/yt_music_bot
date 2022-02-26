@@ -110,8 +110,13 @@ def a(client, message):
            
         except Exception as e:
             print(e)
-            m.edit('Name incorrect or empty try with correct spelling')
-            return
+                m.edit("No song name entered..!\nCheck Examples 👇",
+                     reply_markup=InlineKeyboardMarkup(
+                        [[
+                        InlineKeyboardButton("Examples", callback_data="egg")
+                        ]])
+                )
+                return
     except Exception as e:
         m.edit(
             "✖️ Check spelling bro try again\n\n"
@@ -196,4 +201,11 @@ async def cb_handler(client, query):
        await query.answer(url=f"https://t.me/All_Music_Helpbot?start={file_id}")
        await query.answer(text= "send pm successfully", show_alert=True)
     """
+    elif query.data == "egg":
+        button = [[
+            InlineKeyboardButton("Tutorial", url="https://t.me/all_music_c/5"),
+            InlineKeyboardButton("Close", callback_data="close_data")
+        ]]
+        await query.message.edit_text(Text.EGG_TXT.format(query.from_user.mention),disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(button))
+
 bot.run()
