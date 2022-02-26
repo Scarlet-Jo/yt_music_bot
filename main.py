@@ -323,7 +323,7 @@ async def cb_handler(client, query):
     elif query.data == "egg":
         user = query.data.split('#')
         if int(user) != 0 and query.from_user.id != int(user):
-        return await query.answer("okDa", show_alert=True)
+            return await query.answer("Not for You 😬", show_alert=True)
         button = [[
             InlineKeyboardButton("Tutorial", url="https://t.me/all_music_c/5"),
             InlineKeyboardButton("Close", callback_data="close_data")
