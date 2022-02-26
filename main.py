@@ -319,10 +319,7 @@ async def cb_handler(client, query):
 
     elif query.data == "eg":
         await query.answer(text=Text.EG_TXT, show_alert=True)
-    """elif query.data == "send_pm":             
-       await query.answer(url=f"https://t.me/All_Music_Helpbot?start={file_id}")
-       await query.answer(text= "send pm successfully", show_alert=True)
-    """
+    
     elif query.data == "egg":
         button = [[
             InlineKeyboardButton("Tutorial", url="https://t.me/all_music_c/5"),
