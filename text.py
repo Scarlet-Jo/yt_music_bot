@@ -36,3 +36,16 @@ Hey {}, its very easy to request music..!
 ➙ /song https://www.youtube.com..
 ===============================
 """
+    EGG_TXT = """
+Hey {}
+Song finding is very easy here\nCheck some examples below 
+
+===============================
+➙ /song darshana Hridayam
+➙ /song alone marshmallow
+➙ /song Arabic Kuthu
+➙ /song https://www.youtube.com..
+===============================
+
+I hope You Have Understood ☺️
+"""
