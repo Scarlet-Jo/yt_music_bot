@@ -144,6 +144,7 @@ def a(client, message):
             audio_file,
             caption=rep,
             thumb=thumb_name,
+            performer=performer,
             parse_mode="markdown",
             title=title,
             duration=dur,
