@@ -142,6 +142,7 @@ def a(client, message):
             secmul *= 60
         m.edit("Uploading..📤")
         message.reply_audio(
+            message.chat.id,
             audio_file,
             caption=rep,
             thumb=thumb_name,
