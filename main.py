@@ -51,7 +51,7 @@ async def start(client, message):
         )
     )
 
-@bot.on_message(filters.command("song") & filters.group)
+@bot.on_message(filters.command("song"))
 def a(client, message):
     
     query = ''
@@ -92,7 +92,7 @@ def a(client, message):
             link = f"https://youtube.com{results[0]['url_suffix']}"           
             info_dict = yt_dlp.YoutubeDL().extract_info(link, download=False)
             filename = f"{info_dict['title']}.mp3"
-            out_folder = f"https://t.me/file_incoming"
+            #out_folder = f"https://t.me/file_incoming"
             
             """ ydl_opts = {
                 'format': 'bestaudio/best',
@@ -140,8 +140,7 @@ def a(client, message):
             dur += int(float(dur_arr[i])) * secmul
             secmul *= 60
         m.edit("Uploading..📤")
-        message.reply_audio(
-            message.chat.id,
+        message.reply_audio(      
             audio_file,
             caption=rep,
             thumb=thumb_name,
