@@ -134,7 +134,7 @@ def a(client, message):
      
     
         #audio_file = f'downloads/{ytinfo.title.replace("/","|")}-{ytinfo.video_id}.mp3'
-        rep =f"⎆ Title : {title[:45]}\n⎆ Duration : {duration} \n⎆ Upload By : {katy}\n⎆ Reqstd by : {message.from_user.first_name}"
+        rep =f"⎆ Title : {title[:50]}\n⎆ Duration : {duration}\n⎆ Reqstd by : {message.from_user.first_name}"
         secmul, dur, dur_arr = 1, 0, duration.split(":")
         for i in range(len(dur_arr) - 1, -1, -1):
             dur += int(float(dur_arr[i])) * secmul
