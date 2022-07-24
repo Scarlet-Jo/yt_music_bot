@@ -39,7 +39,7 @@ async def start(client, message):
     await message.reply_photo(
         photo=random.choice(PICS),
         caption=Text.START_TXT.format(message.from_user.mention),  
-        parse_mode='html',
+        parse_mode=enums.ParseMode.HTML,
         reply_markup=InlineKeyboardMarkup(
             [[
             InlineKeyboardButton("Help", callback_data="help"),
@@ -145,7 +145,6 @@ def a(client, message):
             caption=rep,
             thumb=thumb_name,
             performer=performer,
-            parse_mode="markdown",
             title=title,
             duration=dur,
             #reply_markup=InlineKeyboardMarkup(
