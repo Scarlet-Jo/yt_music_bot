@@ -40,7 +40,7 @@ async def start(client, message):
     await message.reply_photo(
         photo=random.choice(PICS),
         caption=Text.START_TXT.format(message.from_user.mention),  
-        parse_mode=enums.ParseMode.HTML,
+        parse_mode="HTML",
         reply_markup=InlineKeyboardMarkup(
             [[
             InlineKeyboardButton("Help", callback_data="help"),
@@ -87,7 +87,7 @@ def a(client, message):
                 #return
 
             views = results[0]["views"]
-            thumb_name = f'thumb{message.id}.jpg'
+            thumb_name = f'thumb{message.message.id}.jpg'
             thumb = requests.get(thumbnail, allow_redirects=True)
             open(thumb_name, 'wb').write(thumb.content)
             link = f"https://youtube.com{results[0]['url_suffix']}"           
